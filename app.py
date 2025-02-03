@@ -93,7 +93,7 @@ def handle_query(query):
 # Home route
 @app.route('/')
 def index():
-    return render_template('index.html')  # Optional: Create index.html if needed
+    return render_template('index.html')  
 
 # API route
 @app.route('/query', methods=['POST'])
