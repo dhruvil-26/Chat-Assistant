@@ -1,4 +1,4 @@
-# SQLite Chat Assistant
+# Chat Assistant
 
 A Python-based chat assistant that interacts with an SQLite database to answer user queries.
 
@@ -9,7 +9,7 @@ A Python-based chat assistant that interacts with an SQLite database to answer u
 
 ## Running the Project
 1. Clone the repository.
-2. Install dependencies: `pip install -r requirements.txt`.
+2. Install dependencies.
 3. Run the Flask app: `python app.py`.
 4. Open your browser and navigate to `http://127.0.0.1:5000`.
 
