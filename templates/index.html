@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQLite Chat Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+    <div class="chat-container">
+        <h1>Ajackus Chat Assistant</h1>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        <input type="text" class="user-input" id="user-input" placeholder="Type your query here..." />
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        userInput.addEventListener("keypress", async(e) => {
+            if (e.key === "Enter") {
+                const query = userInput.value;
+                userInput.value = "";
+
+                // Display user query
+                chatBox.innerHTML += `<div><strong>You:</strong> ${query}</div>`;
+
+                const response = await fetch("/query", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        query
+                    }),
+                });
+                const data = await response.json();
+                const answer = typeof data.response === "string" ?
+                    data.response :
+                    JSON.stringify(data.response, null, 2);
+                // Display assistant response
+                chatBox.innerHTML += `<div><strong>Assistant:</strong> ${answer}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    </script>
+</body>
+
+</html>
